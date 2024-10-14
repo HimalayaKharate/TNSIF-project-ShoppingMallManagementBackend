@@ -2,6 +2,7 @@ package org.himluck.shoppingmall.mall.service;
 
 import org.himluck.shoppingmall.mall.repositories.OrderDetailsRepo;
 import org.himluck.shoppingmall.mall.entities.OrderDetails;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
 @Service
 public class OrderDetailService {
 
+    @Autowired
     private OrderDetailsRepo repo;
 
     public List<OrderDetails> findAll() {
@@ -31,6 +33,8 @@ public class OrderDetailService {
             objectU.get().setDateTime(object.getDateTime());
             objectU.get().setPaymentMode(object.getPaymentMode());
             objectU.get().setTotal(object.getTotal());
+            objectU.get().setCustomer(object.getCustomer());
+            objectU.get().setShop(object.getShop());
             repo.save(objectU.get());
         }
     }

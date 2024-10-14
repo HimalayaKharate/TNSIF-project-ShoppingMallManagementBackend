@@ -29,16 +29,24 @@ public class OrderDetails {
     @JoinColumn(name = "shop_id")
     private Shop shop;
 
+    public Shop getShop() {
+        return shop;
+    }
+
+    public void setShop(Shop shop) {
+        this.shop = shop;
+    }
 
     public OrderDetails() {
     }
 
-    public OrderDetails(int id, LocalDateTime dateTime, double total, String paymentMode, Customer customer) {
+    public OrderDetails(int id, LocalDateTime dateTime, double total, String paymentMode, Customer customer, Shop shop) {
         this.id = id;
         this.dateTime = dateTime;
         this.total = total;
         this.paymentMode = paymentMode;
         this.customer = customer;
+        this.shop = shop;
     }
 
     public int getId() {

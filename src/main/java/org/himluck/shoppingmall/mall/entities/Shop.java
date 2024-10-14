@@ -1,5 +1,7 @@
 package org.himluck.shoppingmall.mall.entities;
 import jakarta.persistence.*;
+import org.himluck.shoppingmall.user.entities.ShopOwner;
+
 import java.util.List;
 
 @Entity
@@ -10,7 +12,9 @@ public class Shop {
     private int id;
 
     private String name;
-    private String owner;
+    @OneToOne
+    @JoinColumn(name = "owner_id")
+    private ShopOwner owner;
     private String category;
     private String location;
     private String contact;
@@ -21,6 +25,20 @@ public class Shop {
 
     @OneToMany(mappedBy = "shop", cascade = CascadeType.ALL)
     private List<OrderDetails> orders;
+
+    public Shop() {
+    }
+
+    public Shop(int id, String name, ShopOwner owner, String category, String location, String contact, Mall mall, List<OrderDetails> orders) {
+        this.id = id;
+        this.name = name;
+        this.owner = owner;
+        this.category = category;
+        this.location = location;
+        this.contact = contact;
+        this.mall = mall;
+        this.orders = orders;
+    }
 
     // Getters and Setters
 
@@ -40,11 +58,11 @@ public class Shop {
         this.name = name;
     }
 
-    public String getOwner() {
+    public ShopOwner getOwner() {
         return owner;
     }
 
-    public void setOwner(String owner) {
+    public void setOwner(ShopOwner owner) {
         this.owner = owner;
     }
 

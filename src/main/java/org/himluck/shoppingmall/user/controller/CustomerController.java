@@ -1,5 +1,6 @@
 package org.himluck.shoppingmall.user.controller;
 
+import org.himluck.shoppingmall.mall.entities.OrderDetails;
 import org.himluck.shoppingmall.user.entities.Customer;
 import org.himluck.shoppingmall.user.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,6 +52,14 @@ public class CustomerController {
         customerService.DeleteCustomer(id);
         return ResponseEntity.ok(null);
     }
+
+    @PutMapping("{id}/order")
+    public ResponseEntity<Customer> updateOrder(@PathVariable int id, @RequestBody List<OrderDetails> order){
+        customerService.addOrder(id, order);
+        return ResponseEntity.ok(customerService.findByCustomerId(id));
+    }
+
+
 
 
 }
